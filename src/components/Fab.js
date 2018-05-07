@@ -55,7 +55,7 @@ handleIncome=()=>{
 
             >
               <Icon name="navigate"
-              style={{color: 'green', transform: [{ rotate: '180deg' }]}}
+              style={{color: 'yellow', transform: [{ rotate: '180deg' }]}}
               />
             </Button>
 
@@ -63,7 +63,7 @@ handleIncome=()=>{
             onPress={this.handleExpense}
             >
               <Icon name="navigate"
-              style={{color: 'red'}}
+              style={{color: 'blue'}}
                />
             </Button>
 

@@ -29,6 +29,7 @@ import {
 import PickerAccounts from '../components/PickerAccounts';
 import PickerCategories from '../components/PickerCategories';
 import Transaction from '../components/Transaction';
+import Loader from '../components/Loader';
 
 export default class AllTransactions extends React.Component {
 
@@ -51,7 +52,6 @@ componentWillUpdate(){
 }
 
 componentDidMount(){
-
 
 }
 
@@ -110,9 +110,26 @@ render() {
 
 // alert('selectedAcc in AllTransactions render = '+this.state.selectedAcc);
 
-// alert(this.props.screenProps.selectedAcc);
+// alert(this.props.screenProps.authorization);
 
-if(this.state.typeTransaction===null)//TODO
+
+if(!this.props.screenProps.authorization)
+return(
+  <Container>
+    <Header>
+      <Body>
+<Text
+style={styles.textLoader}
+>
+Please wait while data is loading
+</Text>
+      </Body>
+    </Header>
+<Loader/>
+</Container>
+);
+
+else if(this.state.typeTransaction===null)//TODO
     return (
       <Container>
         <Header>
@@ -177,6 +194,7 @@ typeTransaction = {this.state.typeTransaction}
 
 
 // Expense or Income
+else if(this.state.typeTransaction!==null)
     return (
       <Container>
         <Header>
@@ -226,16 +244,10 @@ typeTransaction = {this.state.typeTransaction}
 }
 
 const styles = StyleSheet.create({
-  addButton: {
-    // backgroundColor: 'green',
-    // width: 50,
-    // height: 50,
-    // borderRadius: 50,
-    // borderColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center'
-    // marginBottom: 96,
+  textLoader: {
+    color: 'yellow',
+    alignSelf: 'center',
+    fontSize: 18
   },
   addButtonText: {
     color: '#fff',

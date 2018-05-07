@@ -28,7 +28,7 @@ export default class LoginScreen extends Component {
     // this.onRegister = this.onRegister.bind(this);
 
     this.state = {
-        userId: null,
+        // userId: null,
         email:'q10@test.net',
         password:'qwerty'
     }
@@ -45,16 +45,11 @@ this.props.navigation.navigate('AccountScreen', {
   }
 
 
-
-
-
-
 exit=()=>{
   this.setState({
     authentication: false
   });
 }
-
 
 
 onLoginHandler=()=>{
@@ -135,42 +130,29 @@ return(
       onPress={this.exit}>
       <Text>{exit}</Text>
     </Button>
-  {/*  <Button
-      onPress={() => this.props.navigation.navigate('AccountScreen')}
-      >
-      <Text>{next}</Text>
-    </Button>*/}
   </View>
   </Form>
 );
 }
 
 render() {
-  // {this.testPropsFromIndex()}
     return (
       <Container>
         <Header>
-          <Left>
+      {  /*  <Left>
             <Button
               transparent
               onPress={() => this.props.navigation.navigate("DrawerOpen")}
             >
               <Icon name="menu" />
             </Button>
-          </Left>
+          </Left>*/}
           <Body>
-            <Title>Login Screen</Title>
+            <Title style={styles.textTitle}>Login Screen</Title>
           </Body>
         </Header>
 <Content>
 {this.getContent()}
-
-<Text>userId = {this.props.screenProps.userId}</Text>
-<Text>
-categoriesTransactions length = {this.props.screenProps.categoriesTransactions.length}
-</Text>
-
-
 </Content>
       </Container>
     );
@@ -178,6 +160,9 @@ categoriesTransactions length = {this.props.screenProps.categoriesTransactions.l
 }
 
 const styles = StyleSheet.create({
+  textTitle: {
+    alignSelf: 'center'
+  },
   addButton: {
     // backgroundColor: 'green',
     // width: 50,

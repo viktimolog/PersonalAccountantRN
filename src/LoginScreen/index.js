@@ -35,7 +35,8 @@ export default class MyDrawer extends Component {
         transactions:[],
         categoriesTransactions:[],
         selectedAcc:null,
-        selectedCat:null
+        selectedCat:null,
+        authorization: false
   }
 }
 
@@ -116,7 +117,8 @@ this.setState({
   transactions: transactions,
   categoriesTransactions: categoriesTransactions,
   selectedAcc: selectedAcc,
-  selectedCat: selectedCat
+  selectedCat: selectedCat,
+  authorization: true
     });
 });
 }
@@ -200,7 +202,6 @@ this.setState({
 });
 
 }
-
 
 addNewCategory = name => {
 const newCat = {
@@ -316,6 +317,7 @@ render() {
         next: this.next,
         getIDSelectedAcc: this.getIDSelectedAcc,
         addNewTransaction: this.addNewTransaction,
+        authorization: this.state.authorization
 
       }
     }

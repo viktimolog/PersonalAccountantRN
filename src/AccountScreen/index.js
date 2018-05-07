@@ -126,6 +126,7 @@ testSetState=()=>{
         selectedCat: this.props.screenProps.selectedCat,
         setSelectedAcc: this.props.screenProps.setSelectedAcc,
         setSelectedCat: this.props.screenProps.setSelectedCat,
+        authorization: this.props.screenProps.authorization,
 
          // test: this.props.navigation.state.params.test,
 
