@@ -25,13 +25,8 @@ export default class AddAccountScreen extends Component {
 
   constructor () {
     super();
-    // this.onLogin = this.onLogin.bind(this);
-    // this.onRegister = this.onRegister.bind(this);
-
     this.state = {
-          name:'',
-          sum:0,
-          transactions:[]
+          name:''
     }
   }
 
@@ -46,11 +41,7 @@ addAccountHandler=()=>{
   this.props.screenProps.addNewAccount(this.state.name);
 }
 
-
 render() {
-
-// alert('render AddAccountScreen');
-
     return (
       <Container>
         <Header>

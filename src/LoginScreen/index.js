@@ -8,6 +8,8 @@ import { DrawerNavigator } from 'react-navigation';
 import firebaseApp from '../Firebase';
 import { NavigationActions } from 'react-navigation';
 
+// const routes = ["LoginScreen", "AccountScreen", "AddAccountScreen","AddCategoryScreen"];
+
 const HomeScreenRouter = DrawerNavigator(
   {
     LoginScreen: {screen: LoginScreen},
@@ -23,11 +25,9 @@ const HomeScreenRouter = DrawerNavigator(
 export default class MyDrawer extends Component {
   constructor(props) {
     super(props);
-
     this.onLogin = this.onLogin.bind(this);
     this.onRegister = this.onRegister.bind(this);
-    this.addNewCategory = this.addNewCategory.bind(this);
-
+    // this.addNewCategory = this.addNewCategory.bind(this);
     this.state = {
         userId:null,
         accounts:[],
@@ -40,7 +40,6 @@ export default class MyDrawer extends Component {
 }
 
 getDataFromDB=(userId)=>{
-
 let categoriesTransactions=[], accounts=[], transactions=[],
 selectedAcc, selectedCat, promises=[];
 
@@ -82,13 +81,10 @@ promises.push(
 
 
 Promise.all(promises).then(values => {
-
 if(selectedAcc===undefined && accounts.length>0)
 selectedAcc = accounts[0].name;
 if(selectedCat===undefined && categoriesTransactions.length>0)
 selectedCat = categoriesTransactions[0].name;
-
-// alert('selectedAcc in getData = '+selectedAcc);//ok
 
 this.setState({
   userId: userId,
@@ -103,14 +99,10 @@ this.setState({
 }
 
 addNewTransaction = (selectedAcc, selectedCat, typeTrans, sum, description='') => {
-
 let curAcc = this.state.accounts.filter(account => account.name === selectedAcc)[0];
-
 if(typeTrans==='expense' && curAcc.sum<sum){
-
-  alert('Sorry, You do not have enough money on this account!');
+alert('Sorry, You do not have enough money on this account!');
 }
-
 else{
   let newTransaction = {
   id: Math.floor(Date.now() / 1000),
@@ -121,40 +113,30 @@ else{
   sum: sum,
   description: description
   }
-
 if(typeTrans==='expense'){
   curAcc.sum = parseInt(curAcc.sum) - parseInt(sum);
 }
-
 if(typeTrans==='income'){
   curAcc.sum = parseInt(curAcc.sum) + parseInt(sum);
 }
-
 const index = this.state.accounts.indexOf(curAcc);
-
 const changedAcc = {
     id: curAcc.id,
     name: curAcc.name,
     sum: curAcc.sum
 };
-
-let updatedArrAccounts = this.state.accounts.filter(account => account.id !== curAcc.id);
-
+let updatedArrAccounts = this.state.accounts
+          .filter(account => account.id !== curAcc.id);
 updatedArrAccounts.splice(index, 0, changedAcc);
-
-
-  firebaseApp.database().ref(this.state.userId).child('transactions')
+firebaseApp.database().ref(this.state.userId).child('transactions')
   .push(newTransaction);
-
-  firebaseApp.database().ref(this.state.userId).child('accounts')
+firebaseApp.database().ref(this.state.userId).child('accounts')
   .set(updatedArrAccounts);
-
   this.setState({
     transactions: [...this.state.transactions, newTransaction],
     accounts: updatedArrAccounts
   });
 }
-
 }
 
 addNewAccount = name => {
@@ -162,9 +144,8 @@ const newAcc = {
    id: Math.floor(Date.now() / 1000),
    name: name,
    sum: 0,
-   transactions: new Array()//TODO
+   transactions: new Array()
  }
-
 let newArrAccounts = [...this.state.accounts];
 newArrAccounts.push(newAcc);
 
@@ -198,8 +179,6 @@ this.setState({
 }
 
 async onRegister(email, password) {
-// const {email, password} = this.state;
-
     try {
         await firebaseApp.auth()
             .createUserAndRetrieveDataWithEmailAndPassword(email, password)
@@ -214,35 +193,24 @@ async onRegister(email, password) {
               .set({
                       email: email
                     });
-
-
     } catch (error) {
         alert(error.toString())
     }
 }
 
 async onLogin(email, password) {
-
 try{
-
 await firebaseApp.auth()
             .signInAndRetrieveDataWithEmailAndPassword(email, password)
             .then((response) => {
               this.getDataFromDB(response.user.uid);
-               // this.setState({
-               //   userId : response.user.uid
-               // })
             })
-
       } catch (error) {
           alert(error.toString())
       }
 }
 
 getIDSelectedAcc=(selectedAcc)=>{
-
-// alert('selectedAcc = '+selectedAcc);//undefined
-
   let curAcc = this.state.accounts
   .filter(account => account.name === selectedAcc)[0];
    return curAcc ? curAcc.id : 0;
@@ -261,20 +229,11 @@ setSelectedCat=val=>{
 }
 
 render() {
-
-// alert('Length trans in MyDrawer = '+this.state.categoriesTransactions.toString());
-
-  // alert('UserId in MyDrawer = '+this.state.userId);//
-
-// alert('Render in Drawer');
-
     return (
-
       <HomeScreenRouter
       screenProps={
       {
         userId: this.state.userId,
-        authentication: this.state.selectedAcc,
         navigation: this.props.navigation,
         categoriesTransactions: this.state.categoriesTransactions,
         transactions: this.state.transactions,
@@ -283,19 +242,13 @@ render() {
         selectedCat: this.state.selectedCat,
         setSelectedAcc: this.setSelectedAcc,
         setSelectedCat: this.setSelectedCat,
-
-
-        // test: this.props.navigation.state.params.test,
-        test2: this.test2,
         onRegister: this.onRegister,
         onLogin: this.onLogin,
         addNewCategory: this.addNewCategory,
         addNewAccount: this.addNewAccount,
-        next: this.next,
         getIDSelectedAcc: this.getIDSelectedAcc,
         addNewTransaction: this.addNewTransaction,
         authorization: this.state.authorization
-
       }
     }
     />

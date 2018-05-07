@@ -10,7 +10,24 @@ import {
   Icon
 } from "native-base";
 
-const routes = ["LoginScreen", "AccountScreen", "AddAccountScreen","AddCategoryScreen"];
+   const routes = [
+     {
+       name: 'Login',
+       route: 'LoginScreen'
+     },
+     {
+       name: 'Accounts - Transactions',
+       route: 'AccountScreen'
+     },
+     {
+       name: 'Add new account',
+       route: 'AddAccountScreen'
+     },
+     {
+       name: 'Add new category',
+       route: 'AddCategoryScreen'
+     }
+   ];
 
 export default class SideBar extends Component {
   render() {
@@ -24,7 +41,6 @@ export default class SideBar extends Component {
               width: '100%',
               position: "absolute",
               alignSelf: "center",
-              // top: 20
             }}
             source={require('../../assets/logo.png')}
           />
@@ -35,10 +51,10 @@ export default class SideBar extends Component {
               return (
                 <ListItem
                   button
-                  onPress={() => this.props.navigation.navigate(data)}
+                  onPress={() => this.props.navigation.navigate(data.route)}
                 >
                   <Text>
-                  {data}
+                  {data.name}
                   </Text>
                 </ListItem>
               );

@@ -240,8 +240,6 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
-    // justifyContent: 'center',
-    // alignSelf:'center',
     flexDirection: 'row',
     height: 72,
     borderWidth: 0.5,

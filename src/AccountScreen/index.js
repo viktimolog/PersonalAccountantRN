@@ -7,7 +7,6 @@ import { TabNavigator } from "react-navigation";
 import { NavigationActions } from "react-navigation";
 import firebaseApp from '../Firebase';
 import {
-  // Fab,
   Button,
   Text,
   Icon,
@@ -73,49 +72,12 @@ return (
 );
 
 export default class MyTab extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-        // userId:null,
-        // accounts:[],
-        // transactions:[],
-        // categoriesTransactions:[],
-        // selectedAcc:null,
-        // selectedCat:null
-    }
-  }
-
-componentWillUpdate(){
-
-  // alert(this.props.screenProps.accounts.length);
-}
-
-test1=()=>{
-  alert('This is the test1 class MyTab');
-}
-
-testSetState=()=>{
-  this.setState({
-    userId: "qqq"
-  });
-}
-
-
-
   render() {
-
-// alert('render index MyTab');
-
     return (
-
       <MainScreenNavigator
       screenProps={
       {
-         // userId: this.props.navigation.state.params.userId,
         navigation: this.props.navigation,
-
-
         userId: this.props.screenProps.userId,
         categoriesTransactions: this.props.screenProps.categoriesTransactions,
         transactions: this.props.screenProps.transactions,
@@ -127,14 +89,6 @@ testSetState=()=>{
         setSelectedAcc: this.props.screenProps.setSelectedAcc,
         setSelectedCat: this.props.screenProps.setSelectedCat,
         authorization: this.props.screenProps.authorization,
-
-         // test: this.props.navigation.state.params.test,
-
-        test1: this.test1,
-         test: this.props.screenProps.test2,
-         testSetState: this.testSetState,
-
-
       }
     }
     />
