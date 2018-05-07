@@ -47,9 +47,7 @@ export default class Incomes extends Component {
             <Title>Incomes</Title>
           </Body>
         </Header>
-
-
-
+<View style={{marginBottom: 100}}>
 <ScrollView>
     {
       this.props.screenProps.transactions
@@ -64,7 +62,7 @@ export default class Incomes extends Component {
               )
     }
 </ScrollView>
-
+</View>
       </Container>
     );
   }

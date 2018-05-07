@@ -21,29 +21,13 @@ import { NavigationActions } from "react-navigation";
 import firebaseApp from '../Firebase';
 import Category from '../components/Category';
 
-// firebaseApp.database().ref('users').child(response.user.uid).set({
-//       email: this.state.email
-//     });
-
 export default class AddCategoryScreen extends Component {
-
   constructor () {
     super();
-    // this.onLogin = this.onLogin.bind(this);
-    // this.onRegister = this.onRegister.bind(this);
-
     this.state = {
           name:''
     }
   }
-
-// componentDidMount(){
-//
-//   while(!this.props.screenProps.categoriesTransactions.length)
-//   this.setState({
-//     name:''
-//   });
-// }
 
 nameTextHandler = val => {
     this.setState({
@@ -57,9 +41,6 @@ addCategoryHandler=()=>{
 }
 
 render() {
-
-// alert('render AddCategoryScreen');
-
     return (
       <Container>
         <Header>
@@ -91,33 +72,16 @@ value={this.state.name}
 </View>
 </Form>
 
-<Text>
-Count of categories = {
-  this.props.screenProps.categoriesTransactions.length
-  ? this.props.screenProps.categoriesTransactions.length
-  : 0
-}
-</Text>
-
-<Text>
-UserId =
-{this.props.screenProps.userId}
-</Text>
-
 <ScrollView>
     {
         this.props.screenProps.categoriesTransactions.map(category =>
-
 <Category
-
 category={category}
 key={category.id}
 />
       )
     }
 </ScrollView>
-
-
 </Content>
       </Container>
     );

@@ -82,35 +82,18 @@ value={this.state.newAccName}
 </View>
 </Form>
 
-<Text>
-Count of accounts = {
-  this.props.screenProps.accounts.length
-  ? this.props.screenProps.accounts.length
-  : 0
-}
-</Text>
-
-<Text>
-UserId =
-{this.props.screenProps.userId}
-</Text>
-
 <ScrollView>
 {
-  this.props.screenProps.accounts.map(account =>
-
+this.props.screenProps.accounts.map(account =>
 <Account
-
 account={account}
 key={account.id}
 />
       )
     }
 </ScrollView>
-
-
 </Content>
-      </Container>
+</Container>
     );
   }
 }

@@ -37,8 +37,6 @@ export default class AllTransactions extends React.Component {
     super(props);
 
   this.state = {
-    // selectedAcc:'',//первое значение из массива accounts[0].name
-    // selectedCat:'',//первое значение из массива categoriesTransactions[0].name
     income: false,
     expense: false,
     typeTransaction: null,
@@ -47,25 +45,21 @@ export default class AllTransactions extends React.Component {
     }
 }
 
-componentWillUpdate(){
-// alert('componentWillUpdate of AllTransactions');
-}
-
-componentDidMount(){
-
-}
-
 setTypeTransaction=type=>{
   this.setState({
     typeTransaction: type
   });
 }
 
-// expense=()=>{
-//   this.setState({
-//     expense: !this.state.expense
-//   });
-// }
+onSubmitTransaction=()=>{
+  this.setState({
+    income: false,
+    expense: false,
+    typeTransaction: null,
+    description:'',
+    sum: 0
+  });
+}
 
 descriptionTextHandler = val => {
     this.setState({
@@ -79,21 +73,9 @@ sumTextHandler = val => {
   })
 }
 
-// setSelectedAcc=val=>{
-//   this.setState({
-//     selectedAcc: val
-//   });
-// }
-//
-// setSelectedCat=val=>{
-//   this.setState({
-//     selectedCat: val
-//   });
-// }
-
 onTransactionHandler = () =>{
 
-this.setTypeTransaction(null);
+this.onSubmitTransaction();
 
 this.props.screenProps.addNewTransaction(
 this.props.screenProps.selectedAcc, this.props.screenProps.selectedCat,
@@ -101,7 +83,7 @@ this.state.typeTransaction, this.state.sum, this.state.description)
 }
 
 onCancelHandler= () =>{
-  this.setTypeTransaction(null);
+  this.onSubmitTransaction();
 }
 
 render() {
@@ -129,7 +111,7 @@ Please wait while data is loading
 </Container>
 );
 
-else if(this.state.typeTransaction===null)//TODO
+else if(this.state.typeTransaction===null)
     return (
       <Container>
         <Header>
@@ -150,20 +132,7 @@ else if(this.state.typeTransaction===null)//TODO
           </Body>
         </Header>
 
-
-{/*<Text>userId = {this.props.screenProps.userId}</Text>
-<Text>
-categoriesTransactions length = {this.props.screenProps.categoriesTransactions.length}
-</Text>
-<Text>
-accounts length = {this.props.screenProps.accounts.length}
-</Text>
-<Text>
-Transactions length = {this.props.screenProps.transactions.length}
-</Text>*/}
-
-
-
+<View style={{marginBottom: 100}}>
 <ScrollView>
     {
         this.props.screenProps.transactions
@@ -187,37 +156,40 @@ testSetState = {this.props.screenProps.testSetState}
 setTypeTransaction = {this.setTypeTransaction}
 typeTransaction = {this.state.typeTransaction}
 />
-
+</View>
 </Container>
-
 );
-
 
 // Expense or Income
 else if(this.state.typeTransaction!==null)
     return (
       <Container>
         <Header>
-<Title>New {`${this.state.typeTransaction}`} transaction</Title>
+        <Body>
+  <Text
+  style={styles.textLoader}
+  >
+  New {`${this.state.typeTransaction}`} transaction
+  </Text>
+        </Body>
         </Header>
         <Content>
-
         <Form>
         <Item>
           <Input
           placeholder="Description"
-          // autoFocus={true}
+          autoFocus={true}
           onChangeText={this.descriptionTextHandler}
           value={this.state.description}
           />
         </Item>
         <Item last>
           <Input placeholder="Sum"
+          keyboardType = 'numeric'
           onChangeText={this.sumTextHandler}
           value={`${this.state.sum}`}
           />
         </Item>
-
       <View style={styles.container}>
           <Button
             onPress={this.onTransactionHandler}>
@@ -228,15 +200,12 @@ else if(this.state.typeTransaction!==null)
             <Text>Cancel</Text>
           </Button>
         </View>
-
         <PickerCategories
         categoriesTransactions={this.props.screenProps.categoriesTransactions}
         selectedCat={this.props.screenProps.selectedCat}
         setSelectedCat={this.props.screenProps.setSelectedCat}
         />
-
         </Form>
-
         </Content>
       </Container>
     );
@@ -245,7 +214,7 @@ else if(this.state.typeTransaction!==null)
 
 const styles = StyleSheet.create({
   textLoader: {
-    color: 'yellow',
+    color: 'white',
     alignSelf: 'center',
     fontSize: 18
   },

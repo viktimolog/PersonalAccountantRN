@@ -6,7 +6,7 @@ import AddCategoryScreen from '../AddCategoryScreen/index.js';
 import SideBar from '../SideBar/SideBar.js';
 import { DrawerNavigator } from 'react-navigation';
 import firebaseApp from '../Firebase';
-import { NavigationActions } from "react-navigation";
+import { NavigationActions } from 'react-navigation';
 
 const HomeScreenRouter = DrawerNavigator(
   {
@@ -19,7 +19,6 @@ const HomeScreenRouter = DrawerNavigator(
     contentComponent: props => <SideBar {...props} />
   }
 )
-// export default HomeScreenRouter;
 
 export default class MyDrawer extends Component {
   constructor(props) {
@@ -38,26 +37,6 @@ export default class MyDrawer extends Component {
         selectedCat:null,
         authorization: false
   }
-}
-
-// componentWillUpdate(){
-// // alert('componentWillUpdate of AccountScreen index');
-//
-// const userId = this.props.navigation.state.params.userId;
-//
-// this.getDataFromDB(userId);
-// }
-
-componentDidMount(){
-
-// alert('componentDidMount AllTransactions');
-// if(this.state.userId)
-// {
-//   const userId = this.state.userId;
-//
-//   this.getDataFromDB(userId);
-// }
-
 }
 
 getDataFromDB=(userId)=>{
@@ -122,8 +101,6 @@ this.setState({
     });
 });
 }
-
-//TODO
 
 addNewTransaction = (selectedAcc, selectedCat, typeTrans, sum, description='') => {
 

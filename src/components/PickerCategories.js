@@ -51,9 +51,8 @@ return this.props.categoriesTransactions.map(category => (
 
     <Picker
       selectedValue={this.props.selectedCat}
-      style={{ height: 50, width: 200 }}
-      onValueChange={(itemValue, itemIndex) =>
-        // this.setState({selectedCat: itemValue})
+      style={{ height: 50, width: 360 }}
+      onValueChange={(itemValue, itemIndex) =>        
         this.props.setSelectedCat(itemValue)
       }>
 

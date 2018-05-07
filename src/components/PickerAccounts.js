@@ -47,18 +47,19 @@ getAlert=(itemIndex)=>{
 
   render() {
     return (
-      <Container>
+    <Container>
     <View>
 
     <Picker
-      selectedValue={this.props.selectedAcc}//
-      style={{ height: 50, width: 250 }}
+      style={{
+        color: 'white',
+        height: 55,
+        width: 320,
+         marginLeft:-80
+      }}
+      selectedValue={this.props.selectedAcc}
       onValueChange={(itemValue, itemIndex) =>
-      // this.getAlert(itemValue)}
-      // this.onSetSelectedAcc(itemValue) }
-
       this.props.setSelectedAcc(itemValue) }
-        // this.setState({selectedAcc: itemValue})}
         >
 
       {this.loadAccounts()}

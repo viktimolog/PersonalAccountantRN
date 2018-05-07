@@ -50,6 +50,7 @@ export default class Expenses extends Component {
           </Body>
 
         </Header>
+        <View style={{marginBottom: 100}}>
         <ScrollView>
             {
                 this.props.screenProps.transactions
@@ -64,6 +65,7 @@ export default class Expenses extends Component {
                     )
             }
         </ScrollView>
+        </View>
       </Container>
     );
   }
