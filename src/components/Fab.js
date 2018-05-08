@@ -10,18 +10,6 @@ export default class FAB extends Component {
     };
   }
 
-  handleTest = () => {
-      this.props.test();
-  }
-
-  handleNavigate=()=>{
-    this.props.navigation.navigate("Expenses");
-  }
-
-  handleTest1 = () => {
-      this.props.test1();
-  }
-
 handleExpense=()=>{
   this.props.setTypeTransaction('expense');
 }
@@ -32,7 +20,7 @@ handleIncome=()=>{
 
   render() {
     return (
-      <View>
+      <View style = {{position: 'absolute', left: 0, right: 0,bottom: 50}}>
           <Fab
             active={this.state.active}
             direction="up"

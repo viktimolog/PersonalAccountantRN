@@ -73,8 +73,8 @@ value={this.state.name}
 </Form>
 
 <ScrollView>
-    {
-        this.props.screenProps.categoriesTransactions.map(category =>
+{
+this.props.screenProps.categoriesTransactions.map(category =>
 <Category
 category={category}
 key={category.id}

@@ -27,7 +27,6 @@ import {
 export default class PickerAccounts extends Component {
 
 loadAccounts=()=> {
-
   return this.props.accounts.map(account => (
      <Picker.Item
       label={account.name + ', sum = ' + account.sum}
@@ -37,19 +36,10 @@ loadAccounts=()=> {
   ))
 }
 
-getAlert=(itemIndex)=>{
-  alert(itemIndex);
-}
-
-// onSetSelectedAcc=itemValue=>{
-// this.props.setSelectedAcc(itemValue);
-// }
-
-  render() {
+render() {
     return (
     <Container>
     <View>
-
     <Picker
       style={{
         color: 'white',
@@ -61,11 +51,8 @@ getAlert=(itemIndex)=>{
       onValueChange={(itemValue, itemIndex) =>
       this.props.setSelectedAcc(itemValue) }
         >
-
       {this.loadAccounts()}
-
     </Picker>
-
     </View>
       </Container>
     );

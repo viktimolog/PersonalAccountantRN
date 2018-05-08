@@ -122,10 +122,21 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+signingConfigs {
+    release {
+        if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+    }
+}
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
@@ -166,7 +177,7 @@ dependencies {
     compile "com.google.firebase:firebase-messaging:11.8.0"
     compile "com.google.firebase:firebase-perf:11.8.0"
     compile "com.google.firebase:firebase-storage:11.8.0"
-    
+
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true
     }

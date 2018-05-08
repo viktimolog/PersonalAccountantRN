@@ -32,10 +32,8 @@ import Transaction from '../components/Transaction';
 import Loader from '../components/Loader';
 
 export default class AllTransactions extends React.Component {
-
   constructor(props) {
-    super(props);
-
+  super(props);
   this.state = {
     income: false,
     expense: false,
@@ -74,9 +72,7 @@ sumTextHandler = val => {
 }
 
 onTransactionHandler = () =>{
-
 this.onSubmitTransaction();
-
 this.props.screenProps.addNewTransaction(
 this.props.screenProps.selectedAcc, this.props.screenProps.selectedCat,
 this.state.typeTransaction, this.state.sum, this.state.description)
@@ -86,15 +82,12 @@ onCancelHandler= () =>{
   this.onSubmitTransaction();
 }
 
+componentWillUpdate(){
+if(!this.props.screenProps.userId)
+this.props.navigation.navigate('LoginScreen');
+}
+
 render() {
-
-// alert('render of AllTransactions');
-
-// alert('selectedAcc in AllTransactions render = '+this.state.selectedAcc);
-
-// alert(this.props.screenProps.authorization);
-
-
 if(!this.props.screenProps.authorization)
 return(
   <Container>
@@ -110,7 +103,6 @@ Please wait while data is loading
 <Loader/>
 </Container>
 );
-
 else if(this.state.typeTransaction===null)
     return (
       <Container>
@@ -131,7 +123,6 @@ else if(this.state.typeTransaction===null)
               />
           </Body>
         </Header>
-
 <View style={{marginBottom: 100}}>
 <ScrollView>
     {
@@ -146,7 +137,7 @@ else if(this.state.typeTransaction===null)
             )
     }
 </ScrollView>
-
+</View>
 <Fab
 navigation = {this.props.screenProps.navigation}
 test = {this.props.screenProps.test}
@@ -156,7 +147,6 @@ testSetState = {this.props.screenProps.testSetState}
 setTypeTransaction = {this.setTypeTransaction}
 typeTransaction = {this.state.typeTransaction}
 />
-</View>
 </Container>
 );
 

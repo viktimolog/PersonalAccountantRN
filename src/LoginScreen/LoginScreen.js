@@ -18,50 +18,47 @@ import {
   Input,
   View
 } from "native-base";
-import { login, reg, exit, next } from '../constants';
+import { login, reg, exit } from '../constants';
 import firebaseApp from '../Firebase';
+import Loader from '../components/Loader';
 
 export default class LoginScreen extends Component {
   constructor () {
     super();
-    // this.onLogin = this.onLogin.bind(this);
-    // this.onRegister = this.onRegister.bind(this);
-
     this.state = {
-        // userId: null,
-        email:'q10@test.net',
-        password:'qwerty'
+        email:'',
+        password:'',
+        getUser: false
     }
   }
 
+componentDidUpdate(){
 
+if(this.props.screenProps.authorization)
+this.props.navigation.navigate('AccountScreen');
 
-next=()=>{
+if(this.props.screenProps.error && this.state.getUser)
+this.OnOffgettingUser();
+}
 
-this.props.navigation.navigate('AccountScreen', {
-  userId: this.state.userId
-});
+onExitHandler=()=>{
+  this.props.screenProps.setInitialState();
+}
 
-  }
-
-
-exit=()=>{
+OnOffgettingUser=()=>{
   this.setState({
-    authentication: false
+    getUser: !this.state.getUser
   });
 }
 
-
 onLoginHandler=()=>{
-
 this.props.screenProps.onLogin(this.state.email, this.state.password);
-this.next();
-
+this.OnOffgettingUser();
 }
 
 onRegisterHandler=()=>{
-  this.props.screenProps.onRegister(this.state.email, this.state.password);
-  this.onLoginHandler();
+this.props.screenProps.onRegister(this.state.email, this.state.password);
+this.OnOffgettingUser();
 }
 
 emailTextHandler = val => {
@@ -76,18 +73,8 @@ passwordTextHandler = val => {
   })
 }
 
-
-test=()=>{
-  alert('This is the test from LoginScreen');
-}
-
-testPropsFromIndex=()=>{//ok working
-  // this.props.screenProps.test2();
-  alert(this.props.screenProps.userId);
-}
-
 getContent = () =>{
-if(!this.state.authentication)
+if(!this.props.screenProps.authorization)
 return(
   <Form>
   <Item>
@@ -117,17 +104,17 @@ return(
   </Form>
 );
 
+if(this.props.screenProps.authorization)
 return(
   <Form>
   <Item last>
     <Input
-
     value={this.state.email}
     />
   </Item>
   <View style={styles.container}>
     <Button
-      onPress={this.exit}>
+      onPress={this.onExitHandler}>
       <Text>{exit}</Text>
     </Button>
   </View>
@@ -136,17 +123,25 @@ return(
 }
 
 render() {
-    return (
+if(this.state.getUser)
+  return(
+    <Container>
+      <Header>
+        <Body>
+  <Text
+  style={styles.textLoader}
+  >
+  Please wait while data is loading
+  </Text>
+        </Body>
+      </Header>
+  <Loader/>
+  </Container>
+  );
+
+return (
       <Container>
         <Header>
-      {  /*  <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("DrawerOpen")}
-            >
-              <Icon name="menu" />
-            </Button>
-          </Left>*/}
           <Body>
             <Title style={styles.textTitle}>Login Screen</Title>
           </Body>
@@ -154,7 +149,7 @@ render() {
 <Content>
 {this.getContent()}
 </Content>
-      </Container>
+</Container>
     );
   }
 }
@@ -163,16 +158,15 @@ const styles = StyleSheet.create({
   textTitle: {
     alignSelf: 'center'
   },
+  textLoader: {
+    color: 'white',
+    alignSelf: 'center',
+    fontSize: 18
+  },
   addButton: {
-    // backgroundColor: 'green',
-    // width: 50,
-    // height: 50,
-    // borderRadius: 50,
-    // borderColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center'
-    // marginBottom: 96,
   },
   addButtonText: {
     color: '#fff',
@@ -196,8 +190,6 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
-    // justifyContent: 'center',
-    // alignSelf:'center',
     flexDirection: 'row',
     height: 72,
     borderWidth: 0.5,

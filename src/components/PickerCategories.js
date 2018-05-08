@@ -25,16 +25,8 @@ import {
 } from "native-base";
 
 export default class PickerCategories extends Component {
-  constructor(props) {
-    super(props);
-
-  this.state = {
-    selectedCat:''
-    }
-}
 
 loadCategories=()=> {
-
 return this.props.categoriesTransactions.map(category => (
      <Picker.Item
       label={'category:  '+category.name}
@@ -48,18 +40,14 @@ return this.props.categoriesTransactions.map(category => (
     return (
       <Container>
     <View>
-
     <Picker
       selectedValue={this.props.selectedCat}
       style={{ height: 50, width: 360 }}
-      onValueChange={(itemValue, itemIndex) =>        
+      onValueChange={(itemValue, itemIndex) =>
         this.props.setSelectedCat(itemValue)
       }>
-
       {this.loadCategories()}
-
     </Picker>
-
     </View>
       </Container>
     );

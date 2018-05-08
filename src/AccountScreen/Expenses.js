@@ -27,13 +27,7 @@ import {
 import Transaction from '../components/Transaction';
 
 export default class Expenses extends Component {
-
-
-  render() {
-
-    // alert('render of Expenses');
-
-    const { navigate } = this.props.navigation;
+render() {
     return (
       <Container>
         <Header>

@@ -28,10 +28,6 @@ import Transaction from '../components/Transaction';
 
 export default class Incomes extends Component {
   render() {
-
-    // alert('render of Incomes');
-
-    const { navigate } = this.props.navigation;
     return (
       <Container>
         <Header>

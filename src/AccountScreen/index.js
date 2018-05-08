@@ -18,15 +18,6 @@ import {
   View
 } from "native-base";
 
-// MainScreenNavigator = TabNavigator(
-//   {
-//     AllTransactions: { screen: AllTransactions },
-//     Expenses: { screen: Expenses },
-//     Incomes: { screen: Incomes }
-//   },
-
-//onPress={() => this.setState({ active: !this.state.active })}
-
 const MainScreenNavigator = TabNavigator(
     {
       AllTransactions: { screen: props => <AllTransactions {...props}/> },
@@ -37,7 +28,6 @@ const MainScreenNavigator = TabNavigator(
     tabBarPosition: "bottom",
     tabBarComponent: props => {
 return (
-
 <Footer style = {{position: 'absolute', left: 0, right: 0,bottom: 0}}>
           <FooterTab>
             <Button
@@ -89,6 +79,8 @@ export default class MyTab extends Component {
         setSelectedAcc: this.props.screenProps.setSelectedAcc,
         setSelectedCat: this.props.screenProps.setSelectedCat,
         authorization: this.props.screenProps.authorization,
+        error: this.props.screenProps.error,
+        setInitialState: this.props.screenProps.setInitialState
       }
     }
     />

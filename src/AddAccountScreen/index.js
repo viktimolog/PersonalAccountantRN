@@ -22,7 +22,6 @@ import firebaseApp from '../Firebase';
 import Account from '../components/Account';
 
 export default class AddAccountScreen extends Component {
-
   constructor () {
     super();
     this.state = {
