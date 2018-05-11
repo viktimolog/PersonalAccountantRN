@@ -39,7 +39,7 @@ export default class AllTransactions extends React.Component {
     expense: false,
     typeTransaction: null,
     description:'',
-    sum: 0
+    sum: ''
     }
 }
 
@@ -55,7 +55,7 @@ onSubmitTransaction=()=>{
     expense: false,
     typeTransaction: null,
     description:'',
-    sum: 0
+    sum: ''
   });
 }
 
@@ -82,28 +82,8 @@ onCancelHandler= () =>{
   this.onSubmitTransaction();
 }
 
-componentWillUpdate(){
-if(!this.props.screenProps.userId)
-this.props.navigation.navigate('LoginScreen');
-}
-
 render() {
-if(!this.props.screenProps.authorization)
-return(
-  <Container>
-    <Header>
-      <Body>
-<Text
-style={styles.textLoader}
->
-Please wait while data is loading
-</Text>
-      </Body>
-    </Header>
-<Loader/>
-</Container>
-);
-else if(this.state.typeTransaction===null)
+if(this.state.typeTransaction===null)
     return (
       <Container>
         <Header>

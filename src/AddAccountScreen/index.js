@@ -60,6 +60,7 @@ render() {
 <Form>
 <Item last>
 <Input placeholder="Input account name"
+autoFocus={true}
 onChangeText={this.nameTextHandler}
 value={this.state.newAccName}
 />

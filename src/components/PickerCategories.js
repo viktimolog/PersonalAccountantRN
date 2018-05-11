@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Picker } from "react-native";
+import { Picker, Dimensions } from "react-native";
 import {
   Button,
   Text,
@@ -25,6 +25,28 @@ import {
 } from "native-base";
 
 export default class PickerCategories extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
+    };
+  }
+
+  handlerOrientation=()=>{
+    this.setState({
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
+    });
+  }
+
+  componentWillMount() {
+  Dimensions.addEventListener('change', this.handlerOrientation);
+   }
+
+  componentWillUnmount() {
+  Dimensions.removeEventListener('change', this.handlerOrientation);
+   }
 
 loadCategories=()=> {
 return this.props.categoriesTransactions.map(category => (
@@ -36,20 +58,24 @@ return this.props.categoriesTransactions.map(category => (
   ))
 }
 
+getWidth=()=>{
+  return {
+        width: this.state.width
+      }
+}
+
   render() {
     return (
-      <Container>
-    <View>
+    <View style={this.getWidth()}>
     <Picker
       selectedValue={this.props.selectedCat}
-      style={{ height: 50, width: 360 }}
+      style={{ height: 55 }}
       onValueChange={(itemValue, itemIndex) =>
         this.props.setSelectedCat(itemValue)
       }>
       {this.loadCategories()}
     </Picker>
     </View>
-      </Container>
     );
   }
 }

@@ -7,10 +7,10 @@ import {
   View,
 } from 'react-native'
 
-export default class App extends Component {
+export default class Loader extends Component {
   render() {
     return (
-      <View style={[styles.container, styles.horizontal]}>      
+      <View style={[styles.container, styles.horizontal]}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     )
@@ -28,5 +28,3 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-
-AppRegistry.registerComponent('App', () => App)

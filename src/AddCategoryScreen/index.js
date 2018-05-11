@@ -60,6 +60,7 @@ render() {
 <Form>
 <Item last>
 <Input placeholder="Input new category"
+autoFocus={true}
 onChangeText={this.nameTextHandler}
 value={this.state.name}
 />

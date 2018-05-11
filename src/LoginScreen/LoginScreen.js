@@ -26,8 +26,9 @@ export default class LoginScreen extends Component {
   constructor () {
     super();
     this.state = {
-        email:'',
-        password:'',
+        email:'e1@test.net',
+        password:'qwerty',
+        // email:'',
         getUser: false
     }
   }
@@ -109,7 +110,7 @@ return(
   <Form>
   <Item last>
     <Input
-    value={this.state.email}
+    value={this.props.screenProps.email}
     />
   </Item>
   <View style={styles.container}>

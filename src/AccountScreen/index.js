@@ -43,7 +43,7 @@ return (
               active={props.navigationState.index === 1}
               onPress={() => props.navigation.navigate("Expenses")}
             >
-              <Icon name="briefcase" />
+              <Icon name="headset" />
               <Text>Expenses</Text>
             </Button>
             <Button
@@ -51,7 +51,7 @@ return (
               active={props.navigationState.index === 2}
               onPress={() => props.navigation.navigate("Incomes")}
             >
-              <Icon name="headset" />
+              <Icon name="briefcase" />
               <Text>Incomes</Text>
             </Button>
           </FooterTab>
@@ -80,6 +80,7 @@ export default class MyTab extends Component {
         setSelectedCat: this.props.screenProps.setSelectedCat,
         authorization: this.props.screenProps.authorization,
         error: this.props.screenProps.error,
+        email: this.props.screenProps.email,
         setInitialState: this.props.screenProps.setInitialState
       }
     }

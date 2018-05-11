@@ -32,7 +32,8 @@ export default class MyDrawer extends Component {
         selectedAcc:null,
         selectedCat:null,
         authorization: false,
-        error: false
+        error: false,
+        email:''
   }
 }
 
@@ -42,15 +43,23 @@ setInitialState=()=>{
     accounts:[],
     transactions:[],
     categoriesTransactions:[],
-    selectedAcc:null,
-    selectedCat:null,
+    selectedAcc: null,
+    selectedCat: null,
     authorization: false,
-    error: false
+    error: false,
+    email: ''
   });
 }
 
 async onRegister(email, password) {
 this.setInitialState();
+if(email==='' || password===''){
+  alert('Fill both fields, please!');
+  this.setState({
+    error: true
+  });
+  return;
+}
     try {
         await firebaseApp.auth()
             .createUserAndRetrieveDataWithEmailAndPassword(email, password)
@@ -70,11 +79,18 @@ this.setInitialState();
 
 async onLogin(email, password) {
 this.setInitialState();
+if(email==='' || password===''){
+  alert('Fill both fields, please!');
+  this.setState({
+    error: true
+  });
+  return;
+}
 try{
 await firebaseApp.auth()
             .signInAndRetrieveDataWithEmailAndPassword(email, password)
             .then((response) => {
-              this.getDataFromDB(response.user.uid);
+              this.getDataFromDB(response.user.uid, email);
             })
       } catch (error) {
           alert(error.toString())
@@ -84,7 +100,7 @@ await firebaseApp.auth()
       }
 }
 
-getDataFromDB=(userId)=>{
+getDataFromDB=(userId, email)=>{
 let categoriesTransactions=[], accounts=[], transactions=[],
 selectedAcc, selectedCat, promises=[];
 
@@ -124,7 +140,6 @@ promises.push(
          })
 );
 
-
 Promise.all(promises).then(values => {
 if(selectedAcc===undefined && accounts.length>0)
 selectedAcc = accounts[0].name;
@@ -139,11 +154,17 @@ this.setState({
   selectedCat: selectedCat,
   authorization: true,
   userId: userId,
+  email: email
     });
 });
 }
 
 addNewTransaction = (selectedAcc, selectedCat, typeTrans, sum, description='') => {
+if(!Number.isInteger(parseInt(sum)) || parseInt(sum)===0){
+  alert('Sorry, You have inputed a wrong sum!');
+  return;
+}
+
 let curAcc = this.state.accounts.filter(account => account.name === selectedAcc)[0];
 if(typeTrans==='expense' && curAcc.sum<sum){
 alert('Sorry, You do not have enough money on this account!');
@@ -187,7 +208,17 @@ firebaseApp.database().ref(this.state.userId).child('accounts')
 }
 }
 
+checkName=(name, arr)=>{
+let arrRes=[];
+arrRes = arr.filter(item => item.name === name);
+return arrRes.length>0 ? true : false;
+}
+
 addNewAccount = name => {
+if(this.checkName(name, this.state.accounts)){
+alert('Attention! This name has already added!');
+  return;
+}
 const newAcc = {
    id: Math.floor(Date.now() / 1000),
    name: name,
@@ -206,10 +237,13 @@ this.setState({
   accounts: newArrAccounts,
   selectedAcc: nameNewAcc
 });
-
 }
 
 addNewCategory = name => {
+  if(this.checkName(name, this.state.categoriesTransactions)){
+  alert('Attention! This name has already added!');
+    return;
+  }
 const newCat = {
   id: Math.floor(Date.now() / 1000),
    name: name
@@ -265,6 +299,7 @@ render() {
         getIDSelectedAcc: this.getIDSelectedAcc,
         addNewTransaction: this.addNewTransaction,
         authorization: this.state.authorization,
+        email: this.state.email,
         error: this.state.error,
         setInitialState: this.setInitialState
       }

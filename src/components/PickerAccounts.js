@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Picker } from "react-native";
+import { StyleSheet, Picker, Dimensions } from "react-native";
 import {
   Button,
   Text,
@@ -25,6 +25,28 @@ import {
 } from "native-base";
 
 export default class PickerAccounts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height
+    };
+  }
+
+handlerOrientation=()=>{
+  this.setState({
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  });
+}
+
+componentWillMount() {
+Dimensions.addEventListener('change', this.handlerOrientation);
+ }
+
+componentWillUnmount() {
+Dimensions.removeEventListener('change', this.handlerOrientation);
+ }
 
 loadAccounts=()=> {
   return this.props.accounts.map(account => (
@@ -36,17 +58,21 @@ loadAccounts=()=> {
   ))
 }
 
+getWidthMargin=()=>{
+let margin = this.state.height < this.state.width
+ ? -160
+ : -80
+  return {
+        marginLeft: margin,
+        width: this.state.width-40
+      }
+}
+
 render() {
     return (
-    <Container>
-    <View>
+    <View style={this.getWidthMargin()}>
     <Picker
-      style={{
-        color: 'white',
-        height: 55,
-        width: 320,
-         marginLeft:-80
-      }}
+      style={styles.picker}
       selectedValue={this.props.selectedAcc}
       onValueChange={(itemValue, itemIndex) =>
       this.props.setSelectedAcc(itemValue) }
@@ -54,7 +80,13 @@ render() {
       {this.loadAccounts()}
     </Picker>
     </View>
-      </Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  picker:{
+    color: 'white',
+    height: 55
+  }
+});

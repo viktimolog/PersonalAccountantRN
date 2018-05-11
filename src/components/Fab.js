@@ -27,7 +27,9 @@ handleIncome=()=>{
             style={{ backgroundColor: '#5067FF'}}
             position="bottomRight"
             onPress={() => this.setState({ active: !this.state.active })}>
-            <Icon name="share" />
+            <Icon name="pie"
+            style={{color: 'red'}}
+            />
             <Button style={{ backgroundColor: '#3B5998'}}
             onPress={this.handleIncome}
             >
