@@ -10,11 +10,9 @@ import {
 export default class Category extends Component {
     render() {
         return (
-          <Text>
-          {
-            this.props.category.name
-          }
-          </Text>
+            <Text>
+                {this.props.category.name}
+            </Text>
         )
     }
 }

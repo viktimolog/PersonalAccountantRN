@@ -10,11 +10,9 @@ import {
 export default class Account extends Component {
     render() {
         return (
-          <Text style={{color: 'red'}}>
-          {
-            this.props.account.name + ', sum = '+this.props.account.sum
-          }
-          </Text>
+            <Text style={{color: 'red'}}>
+                {`${this.props.account.name} sum = ${this.props.account.sum}`}
+            </Text>
         )
     }
 }
