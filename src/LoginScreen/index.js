@@ -216,6 +216,7 @@ export default class MyDrawer extends Component {
       name = name.trim();
       if(name===''){
         alert('Attention! You are trying to add an empty string!');
+        return;
       }
         if (this.checkName(name, this.state.accounts)) {
             alert('Attention! This name has already added!');
@@ -245,6 +246,7 @@ export default class MyDrawer extends Component {
       name = name.trim();
       if(name===''){
         alert('Attention! You are trying to add an empty string!');
+        return;
       }
         if (this.checkName(name, this.state.categoriesTransactions)) {
             alert('Attention! This name has already added!');
