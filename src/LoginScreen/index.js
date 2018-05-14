@@ -215,7 +215,7 @@ export default class MyDrawer extends Component {
     addNewAccount = name => {
       name = name.trim();
       if(name===''){
-        alert('Attention! You are tried to add an empty string!');
+        alert('Attention! You are trying to add an empty string!');
       }
         if (this.checkName(name, this.state.accounts)) {
             alert('Attention! This name has already added!');
@@ -244,7 +244,7 @@ export default class MyDrawer extends Component {
     addNewCategory = name => {
       name = name.trim();
       if(name===''){
-        alert('Attention! You are tried to add an empty string!');
+        alert('Attention! You are trying to add an empty string!');
       }
         if (this.checkName(name, this.state.categoriesTransactions)) {
             alert('Attention! This name has already added!');
